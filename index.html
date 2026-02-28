@@ -18,6 +18,7 @@
       --metal-a: rgba(248, 250, 252, 0.26);
       --metal-b: rgba(148, 163, 184, 0.2);
       --metal-c: rgba(203, 213, 225, 0.14);
+      --table-font-size: 24px;
     }
 
     * {
@@ -67,7 +68,7 @@
 
     .header h1 {
       margin: 0;
-      font-size: clamp(13px, 1.5vw, 18px);
+      font-size: clamp(15px, 1.8vw, 22px);
       letter-spacing: 0.08em;
       text-transform: uppercase;
       text-shadow: 0 0 14px rgba(124, 58, 237, 0.35);
@@ -75,7 +76,7 @@
 
     .header span {
       color: var(--muted);
-      font-size: 10px;
+      font-size: 12px;
       text-transform: uppercase;
       letter-spacing: 0.16em;
     }
@@ -88,7 +89,7 @@
 
     .header-controls label {
       color: var(--muted);
-      font-size: 10px;
+      font-size: 12px;
       text-transform: uppercase;
       letter-spacing: 0.12em;
     }
@@ -99,7 +100,7 @@
       border-radius: 6px;
       background: rgba(12, 18, 34, 0.92);
       color: var(--text);
-      font-size: 11px;
+      font-size: 14px;
       padding: 0 8px;
       min-width: 110px;
     }
@@ -124,7 +125,7 @@
     .chipleaders-title {
       margin: 0;
       padding: 12px 16px;
-      font-size: 12px;
+      font-size: 14px;
       text-transform: uppercase;
       letter-spacing: 0.14em;
       color: var(--muted);
@@ -153,7 +154,7 @@
     td {
       padding: 6px 9px;
       text-align: left;
-      font-size: 11px;
+      font-size: 16px;
       line-height: 1.2;
     }
 
@@ -161,10 +162,30 @@
       color: var(--muted);
       text-transform: uppercase;
       letter-spacing: 0.08em;
-      font-size: 10px;
+      font-size: 16px;
       border-bottom: 1px solid var(--line);
       padding-top: 4px;
       padding-bottom: 4px;
+    }
+
+    thead th:nth-child(1) {
+      width: 72px;
+    }
+
+    thead th:nth-child(3) {
+      width: 130px;
+    }
+
+    thead th:nth-child(4) {
+      width: 90px;
+    }
+
+    thead th:nth-child(5) {
+      width: 88px;
+    }
+
+    thead th.name-col {
+      width: auto;
     }
 
     tbody tr {
@@ -181,6 +202,7 @@
       background: rgba(16, 25, 44, 0.82);
       border-top: 1px solid rgba(196, 224, 255, 0.11);
       border-bottom: 1px solid rgba(95, 121, 154, 0.22);
+      font-size: var(--table-font-size);
     }
 
     tbody td:first-child {
@@ -202,6 +224,9 @@
     .name {
       font-weight: 600;
       letter-spacing: 0.02em;
+      white-space: normal;
+      overflow-wrap: anywhere;
+      word-break: break-word;
     }
 
     .stake {
@@ -221,15 +246,21 @@
 
     .move {
       width: 88px;
+      min-width: 88px;
       text-align: center;
+      white-space: nowrap;
     }
 
     .move-stack {
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      gap: 1px;
-      min-height: 10px;
+      flex-wrap: wrap;
+      gap: 2px;
+      row-gap: 2px;
+      width: 62px;
+      min-height: 20px;
+      min-width: 62px;
     }
 
     .trend {
@@ -240,22 +271,22 @@
     }
 
     .trend.up {
-      border-left: 3px solid transparent;
-      border-right: 3px solid transparent;
-      border-bottom: 5px solid #22d3ee;
+      border-left: 5px solid transparent;
+      border-right: 5px solid transparent;
+      border-bottom: 8px solid #22d3ee;
       filter: drop-shadow(0 0 4px rgba(34, 211, 238, 0.45));
     }
 
     .trend.down {
-      border-left: 3px solid transparent;
-      border-right: 3px solid transparent;
-      border-top: 5px solid #f87171;
+      border-left: 5px solid transparent;
+      border-right: 5px solid transparent;
+      border-top: 8px solid #f87171;
       filter: drop-shadow(0 0 4px rgba(248, 113, 113, 0.45));
     }
 
     .trend.flat {
-      width: 6px;
-      height: 2px;
+      width: 10px;
+      height: 3px;
       border: 0;
       background: rgba(191, 208, 238, 0.85);
       border-radius: 2px;
@@ -263,27 +294,27 @@
     }
 
     tbody tr.moved-up td {
-      animation: pulseUp 3s ease;
+      animation: pulseUp 5s ease 1;
     }
 
     tbody tr.moved-down td {
-      animation: pulseDown 3s ease;
+      animation: pulseDown 5s ease 1;
     }
 
     tbody tr.actor-jump-up td {
-      animation: actorJumpUp 3s cubic-bezier(0.2, 0.7, 0.2, 1);
+      animation: actorJumpUp 5s cubic-bezier(0.2, 0.7, 0.2, 1) 1;
     }
 
     tbody tr.actor-jump-down td {
-      animation: actorJumpDown 3s cubic-bezier(0.2, 0.7, 0.2, 1);
+      animation: actorJumpDown 5s cubic-bezier(0.2, 0.7, 0.2, 1) 1;
     }
 
     tbody tr.shift-down td {
-      animation: shiftDownBrick 3s ease;
+      animation: shiftDownBrick 5s ease 1;
     }
 
     tbody tr.shift-up td {
-      animation: shiftUpBrick 3s ease;
+      animation: shiftUpBrick 5s ease 1;
     }
 
     @keyframes pulseUp {
@@ -335,6 +366,8 @@
       <div class="header-controls">
         <label for="tournamentSelect">Tournament ID</label>
         <select id="tournamentSelect"></select>
+        <label for="boardSelect">Board</label>
+        <select id="boardSelect"></select>
         <span id="tournamentBadge"></span>
       </div>
     </div>
@@ -345,7 +378,7 @@
             <thead>
               <tr>
                 <th>Rank</th>
-                <th>Name</th>
+                <th class="name-col">Name</th>
                 <th style="text-align:right;">Stack</th>
                 <th style="text-align:right;">Re-Buy</th>
                 <th class="move">Move</th>
@@ -362,7 +395,7 @@
             <thead>
               <tr>
                 <th>Rank</th>
-                <th>Name</th>
+                <th class="name-col">Name</th>
                 <th style="text-align:right;">Stack</th>
                 <th style="text-align:right;">Re-Buy</th>
                 <th class="move">Move</th>
@@ -379,7 +412,7 @@
             <thead>
               <tr>
                 <th>Rank</th>
-                <th>Name</th>
+                <th class="name-col">Name</th>
                 <th style="text-align:right;">Stack</th>
                 <th style="text-align:right;">Re-Buy</th>
                 <th class="move">Move</th>
@@ -399,11 +432,14 @@
     const table2 = document.getElementById("table2");
     const table3 = document.getElementById("table3");
     const tournamentSelect = document.getElementById("tournamentSelect");
+    const boardSelect = document.getElementById("boardSelect");
     const tournamentBadge = document.getElementById("tournamentBadge");
     const SUPABASE_URL = "https://jttwlfsfvaiivlyiyaxz.supabase.co";
     const SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imp0dHdsZnNmdmFpaXZseWl5YXh6Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzA5ODcyNTgsImV4cCI6MjA4NjU2MzI1OH0.1c6iLV7Yznzs_3gQ_dV8Br02F9jJdHWhL-Hl2iASRuQ";
     const FALLBACK_REFRESH_MS = 5000;
-    const BATCH_SIZE = 25;
+    const ROWS_PER_COLUMN = 25;
+    const COLUMNS_PER_BOARD = 3;
+    const PLAYERS_PER_BOARD = ROWS_PER_COLUMN * COLUMNS_PER_BOARD;
     const supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
     let players = [];
@@ -411,7 +447,9 @@
     let leaderboardChannel = null;
     let fallbackRefreshTimer = null;
     let lastActorIds = new Set();
+    let currentBoardIndex = 0;
     const previousRankMapByTournament = new Map();
+    const previousMoveMapByTournament = new Map();
 
     function formatStake(value) {
       return Math.round(value).toLocaleString("en-US");
@@ -460,19 +498,19 @@
         : Array.from(
           { length: iconCount },
           () => `<span class="trend ${trend}" aria-label="${trendLabel}" title="${trendLabel}"></span>`
-        ).join("");
+        ).join("") || `<span class="trend flat" aria-label="No change" title="No change"></span>`;
       const rowClasses = [];
-      if (lastActorIds.has(player.id) && player.move > 0) {
+      if (lastActorIds.has(player.id) && player.move_delta > 0) {
         rowClasses.push("actor-jump-up");
-      } else if (lastActorIds.has(player.id) && player.move < 0) {
+      } else if (lastActorIds.has(player.id) && player.move_delta < 0) {
         rowClasses.push("actor-jump-down");
-      } else if (player.move === -1) {
+      } else if (player.move_delta === -1) {
         rowClasses.push("shift-down");
-      } else if (player.move === 1) {
+      } else if (player.move_delta === 1) {
         rowClasses.push("shift-up");
-      } else if (player.move > 0) {
+      } else if (player.move_delta > 0) {
         rowClasses.push("moved-up");
-      } else if (player.move < 0) {
+      } else if (player.move_delta < 0) {
         rowClasses.push("moved-down");
       }
       return `
@@ -489,6 +527,33 @@
     function setTournamentBadge(text, isError = false) {
       tournamentBadge.textContent = text;
       tournamentBadge.style.color = isError ? "#fca5a5" : "var(--muted)";
+    }
+
+    function updateBoardOptions() {
+      const totalBoards = Math.max(1, Math.ceil(players.length / PLAYERS_PER_BOARD));
+      if (currentBoardIndex >= totalBoards) {
+        currentBoardIndex = 0;
+      }
+
+      if (players.length === 0) {
+        boardSelect.innerHTML = `<option value="0">Board 1</option>`;
+      } else {
+        boardSelect.innerHTML = Array.from({ length: totalBoards }, (_, index) => {
+          const startRank = index * PLAYERS_PER_BOARD + 1;
+          const endRank = Math.min((index + 1) * PLAYERS_PER_BOARD, players.length);
+          return `<option value="${index}">Board ${index + 1} (${startRank}-${endRank})</option>`;
+        }).join("");
+      }
+      boardSelect.value = String(currentBoardIndex);
+    }
+
+    function setConnectedTournamentBadge(tournamentId) {
+      const totalBoards = Math.max(1, Math.ceil(players.length / PLAYERS_PER_BOARD));
+      const startRank = players.length === 0 ? 0 : currentBoardIndex * PLAYERS_PER_BOARD + 1;
+      const endRank = players.length === 0 ? 0 : Math.min((currentBoardIndex + 1) * PLAYERS_PER_BOARD, players.length);
+      setTournamentBadge(
+        `Connected | Tournament: ${tournamentId} | Players: ${players.length} | Board ${currentBoardIndex + 1}/${totalBoards} (${startRank}-${endRank})`
+      );
     }
 
     function normalizeStake(row) {
@@ -520,15 +585,20 @@
     function mapRowsToPlayers(rows, tournamentId, playerNameMap = new Map()) {
       const sortedRows = sortLeaderboardRows(rows);
       const previousMap = previousRankMapByTournament.get(tournamentId) ?? new Map();
+      const previousMoveMap = previousMoveMapByTournament.get(tournamentId) ?? new Map();
       const nextMap = new Map();
+      const nextMoveMap = new Map();
 
       const mappedPlayers = sortedRows.map((row, idx) => {
         const newRank = idx + 1;
         const id = getRowIdentity(row, tournamentId, newRank);
         const oldRank = previousMap.get(id) ?? newRank;
-        const move = oldRank - newRank;
+        const computedMove = oldRank - newRank;
+        const previousMove = previousMoveMap.get(id) ?? 0;
+        const move = computedMove !== 0 ? computedMove : previousMove;
 
         nextMap.set(id, newRank);
+        nextMoveMap.set(id, move);
         const playerUid = String(row.player_uid ?? id);
         return {
           id,
@@ -538,11 +608,13 @@
           rank: newRank,
           stake: Math.max(0, normalizeStake(row)),
           buys: Math.max(0, normalizeBuys(row)),
-          move
+          move,
+          move_delta: computedMove
         };
       });
 
       previousRankMapByTournament.set(tournamentId, nextMap);
+      previousMoveMapByTournament.set(tournamentId, nextMoveMap);
       return mappedPlayers;
     }
 
@@ -607,6 +679,8 @@
         currentTournamentId = "";
         setTournamentBadge("Khong co tournament_id trong leaderboard", true);
         players = [];
+        currentBoardIndex = 0;
+        updateBoardOptions();
         renderAllTables();
         return;
       }
@@ -619,6 +693,8 @@
     async function loadLeaderboardByTournament(tournamentId) {
       if (!tournamentId) {
         players = [];
+        currentBoardIndex = 0;
+        updateBoardOptions();
         renderAllTables();
         return;
       }
@@ -637,15 +713,17 @@
       const playerUidList = leaderboardRows.map((row) => String(row.player_uid ?? "")).filter(Boolean);
       const playerNameMap = await loadPlayerNameMapByUid(playerUidList);
       players = mapRowsToPlayers(leaderboardRows, tournamentId, playerNameMap);
-      lastActorIds = new Set(players.filter((player) => player.move !== 0).map((player) => player.id));
+      lastActorIds = new Set(players.filter((player) => player.move_delta !== 0).map((player) => player.id));
+      updateBoardOptions();
       renderAllTables();
-      setTournamentBadge(`Connected | Tournament: ${tournamentId} | Rows: ${players.length}`);
+      setConnectedTournamentBadge(tournamentId);
     }
 
     function renderAllTables() {
-      table1.innerHTML = players.slice(0, BATCH_SIZE).map((player) => rowHtml(player)).join("");
-      table2.innerHTML = players.slice(BATCH_SIZE, BATCH_SIZE * 2).map((player) => rowHtml(player)).join("");
-      table3.innerHTML = players.slice(BATCH_SIZE * 2, BATCH_SIZE * 3).map((player) => rowHtml(player)).join("");
+      const boardStart = currentBoardIndex * PLAYERS_PER_BOARD;
+      table1.innerHTML = players.slice(boardStart, boardStart + ROWS_PER_COLUMN).map((player) => rowHtml(player)).join("");
+      table2.innerHTML = players.slice(boardStart + ROWS_PER_COLUMN, boardStart + ROWS_PER_COLUMN * 2).map((player) => rowHtml(player)).join("");
+      table3.innerHTML = players.slice(boardStart + ROWS_PER_COLUMN * 2, boardStart + PLAYERS_PER_BOARD).map((player) => rowHtml(player)).join("");
     }
 
     async function refreshCurrentTournament() {
@@ -691,7 +769,7 @@
         )
         .subscribe((status) => {
           if (status === "SUBSCRIBED") {
-            setTournamentBadge(`Connected realtime | Tournament: ${tournamentId} | ENTRIES: ${players.length}`);
+            setConnectedTournamentBadge(tournamentId);
           } else if (status === "CHANNEL_ERROR" || status === "TIMED_OUT") {
             setTournamentBadge(`Realtime loi, dang dung polling | Tournament: ${tournamentId}`, true);
           }
@@ -717,8 +795,23 @@
 
         tournamentSelect.addEventListener("change", async (event) => {
           currentTournamentId = event.target.value;
+          currentBoardIndex = 0;
           await refreshCurrentTournament();
           await subscribeLeaderboardRealtime(currentTournamentId);
+        });
+
+        boardSelect.addEventListener("change", () => {
+          const nextBoardIndex = Number.parseInt(boardSelect.value, 10);
+          if (!Number.isFinite(nextBoardIndex) || nextBoardIndex < 0) {
+            currentBoardIndex = 0;
+            boardSelect.value = "0";
+          } else {
+            currentBoardIndex = nextBoardIndex;
+          }
+          renderAllTables();
+          if (currentTournamentId) {
+            setConnectedTournamentBadge(currentTournamentId);
+          }
         });
 
         await refreshCurrentTournament();
@@ -727,6 +820,8 @@
       } catch (error) {
         setTournamentBadge(`Ket noi Supabase loi: ${error.message ?? error}`, true);
         players = [];
+        currentBoardIndex = 0;
+        updateBoardOptions();
         renderAllTables();
       }
     }
