@@ -1,0 +1,107 @@
+:root {
+  color-scheme: dark;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  background: #08131f;
+  color: #ecf2ff;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  background: radial-gradient(circle at 20% 0%, #123151 0%, #08131f 45%, #05090e 100%);
+}
+
+.shell {
+  width: min(1100px, 94vw);
+  margin: 24px auto;
+  display: grid;
+  gap: 14px;
+}
+
+.top h1 {
+  margin: 0 0 8px;
+  font-size: clamp(1.4rem, 2.7vw, 2.2rem);
+}
+
+.top p {
+  margin: 0;
+  color: #9ec4f0;
+}
+
+.stage {
+  position: relative;
+  border: 1px solid #34557c;
+  border-radius: 14px;
+  overflow: hidden;
+  background: #02050a;
+}
+
+.camera {
+  width: 100%;
+  display: block;
+  aspect-ratio: 16/9;
+  object-fit: cover;
+}
+
+.overlay {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
+.controls {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px;
+}
+
+button {
+  border: 0;
+  border-radius: 10px;
+  padding: 10px 14px;
+  color: #fff;
+  font-weight: 600;
+  cursor: pointer;
+  background: linear-gradient(140deg, #0382ff, #0059c9);
+}
+
+button:disabled {
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+
+label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #b9d6f5;
+}
+
+.debug {
+  border: 1px solid #2d4668;
+  border-radius: 12px;
+  padding: 12px;
+  background: rgba(3, 10, 17, 0.78);
+}
+
+.debug p {
+  margin: 0 0 8px;
+}
+
+pre {
+  margin: 0 0 10px;
+  max-height: 200px;
+  overflow: auto;
+  padding: 10px;
+  border-radius: 8px;
+  border: 1px solid #1f334b;
+  background: #040b14;
+  color: #b8ffda;
+}

@@ -1,63 +1,93 @@
-﻿# Card Scanner iPhone (MVP)
+# Realtime Poker Card Detection (Browser AI Foundation)
 
-App web don gian de:
-- Bat camera sau iPhone
-- Quet la bai tay
-- Xuat du lieu JSON san sang ghi vao database sau
+This repo is now a **Vite + TypeScript** foundation for realtime poker card detection in the browser.
 
-## Chay nhanh
+## What is included
 
-1. Mo terminal tai thu muc project:
-```powershell
-cd D:\4.Rivebase-Test\CameraAI
-```
+- `getUserMedia` camera pipeline (rear camera preferred)
+- ONNX Runtime Web adapter with **WebGPU preference** and automatic **WASM fallback**
+- OpenCV.js loader and preprocessing utility hook (optional, utility-only)
+- Mock inference adapter when no real ONNX model is configured
+- Overlay/debug UI for live boxes, score labels, FPS, logs, and raw detections
+- Modular folders: `camera`, `ai`, `vision`, `state`, `services`
 
-2. Chay web server local:
-```powershell
-python -m http.server 8080
-```
+## Project structure
 
-3. Tim IP may tinh (vi du `192.168.1.10`) va tren iPhone mo:
 ```text
-http://192.168.1.10:8080
+src/
+  ai/
+    adapters/
+      MockCardDetector.ts
+      OnnxCardDetector.ts
+    createInferenceAdapter.ts
+    types.ts
+  camera/
+    CameraService.ts
+  services/
+    overlay.ts
+  state/
+    store.ts
+  vision/
+    opencvLoader.ts
+    preprocess.ts
+  main.ts
+  styles.css
 ```
 
-4. Bam `Bat camera sau` -> cap quyen camera -> dat goc tren trai la bai vao khung -> bam `Quet la bai`.
+## Windows setup and run
 
-## Cau truc du lieu
+### 1. Install dependencies
 
-Moi lan quet se them 1 object JSON, vi du:
-
-```json
-{
-  "id": "uuid",
-  "scannedAt": "2026-03-07T10:30:00.000Z",
-  "rawText": "A SPADE",
-  "rank": "A",
-  "suit": "S",
-  "cardCode": "AS",
-  "source": "iphone-rear-camera"
-}
-```
-
-`cardCode` la ma gon de luu DB (A/K/Q/J/10..2 + S/H/D/C).
-
-## Luu y
-
-- Neu gap loi `trinh duyet khong ho tro camera API`, ly do thuong la dang mo bang HTTP khong an toan tren iPhone.
-- Cach on dinh nhat: dung HTTPS tunnel.
-
-### Chay qua HTTPS tunnel (de nghi)
-
-1. Cai `ngrok` tren may tinh.
-2. Chay web local:
 ```powershell
-python -m http.server 8080
+cd D:\2.Rivebase-Staging\leaderboard\CameraAI
+npm install
 ```
-3. Tao tunnel HTTPS:
+
+### 2. Run dev server
+
 ```powershell
-ngrok http 8080
+npm run dev
 ```
-4. Mo link `https://...ngrok-free.app` tren iPhone (Safari), sau do bam `Bat camera sau`.
-- OCR co the nham neu anh mo, rung tay, hoac goc bai bi che. Nen quet du anh sang va ro goc bai.
-- Hien tai du lieu duoc giu trong RAM va hien thi tren man hinh, chua push DB.
+
+Open the URL printed by Vite (default `http://localhost:5173`).
+
+### 3. Build check
+
+```powershell
+npm run build
+```
+
+## Configure a real ONNX model
+
+By default, the app uses mock detections unless `VITE_ONNX_MODEL_URL` is provided.
+
+Create `.env.local`:
+
+```env
+VITE_ONNX_MODEL_URL=/models/cards-yolo.onnx
+```
+
+Put your ONNX model in `public/models/cards-yolo.onnx` (or use a full URL).
+
+## Current ONNX expectation
+
+`OnnxCardDetector` currently assumes a YOLO-style flattened output decoded as per-row:
+
+`[cx, cy, w, h, confidence, classId]`
+
+If your model output differs, update `decodeYoloStyle()` in `src/ai/adapters/OnnxCardDetector.ts`.
+
+## Future-ready YOLO -> ONNX -> Browser path
+
+1. Train/fine-tune YOLO on poker card classes and export ONNX (fixed input, e.g. 640).
+2. Validate ONNX output tensor shape and postprocess expectations.
+3. Place model in `public/models/` and set `VITE_ONNX_MODEL_URL`.
+4. Map model class IDs to card labels (`AS`, `KH`, etc.) in ONNX adapter decoding.
+5. Add NMS and confidence calibration if not baked into model output.
+6. Optimize browser runtime: quantized model, stable input size, WebGPU-enabled browser.
+
+## Notes
+
+- Camera access needs secure context (`https://` or `http://localhost`).
+- OpenCV.js is optional and only used as a preprocessing utility gate.
+- The mock adapter keeps UI and pipeline testable before model integration.
