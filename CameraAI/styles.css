@@ -1,0 +1,94 @@
+﻿:root {
+  --bg: #0f172a;
+  --card: #111827;
+  --accent: #16a34a;
+  --text: #e5e7eb;
+  --muted: #9ca3af;
+  --danger: #ef4444;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  font-family: "Segoe UI", sans-serif;
+  background: radial-gradient(circle at top, #1e293b 0%, var(--bg) 60%);
+  color: var(--text);
+}
+
+.app {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 16px;
+}
+
+h1 { margin-bottom: 6px; }
+.sub { margin-top: 0; color: var(--muted); }
+
+.camera-wrap {
+  position: relative;
+  border: 1px solid #334155;
+  border-radius: 12px;
+  overflow: hidden;
+  background: #000;
+}
+
+video {
+  width: 100%;
+  aspect-ratio: 3 / 4;
+  object-fit: cover;
+  display: block;
+}
+
+.guide {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  border: 2px dashed #f8fafc;
+  width: 35%;
+  height: 42%;
+  font-size: 12px;
+  color: #f8fafc;
+  padding: 8px;
+  background: rgba(0,0,0,0.25);
+}
+
+.controls {
+  margin-top: 12px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+}
+
+button {
+  border: none;
+  border-radius: 10px;
+  padding: 12px;
+  color: white;
+  font-weight: 600;
+  background: #334155;
+}
+
+button:disabled { opacity: 0.5; }
+#startBtn { background: var(--accent); }
+#stopBtn { background: var(--danger); }
+
+.status {
+  min-height: 24px;
+  color: #bfdbfe;
+}
+
+.result {
+  margin-top: 12px;
+  background: var(--card);
+  border-radius: 12px;
+  padding: 10px;
+  border: 1px solid #1f2937;
+}
+
+pre {
+  margin: 0;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+  color: #d1fae5;
+}
